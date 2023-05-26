@@ -7,10 +7,11 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-  GamePanel gp;
-  KeyHandler keyH;
+  private GamePanel gp;
+  private KeyHandler keyH;
 
   public Player(GamePanel gp, KeyHandler keyH) {
+    super(100, 100, 4); // Invoke the Entity superclass constructor with initial values
 
     this.gp = gp;
     this.keyH = keyH;
@@ -19,7 +20,6 @@ public class Player extends Entity {
   }
 
   public void setDefaultValues() {
-
     x = 100;
     y = 100;
     speed = 4;
@@ -27,26 +27,26 @@ public class Player extends Entity {
 
   public void update() {
     int xSpeed = 0, ySpeed = 0;
-    if (keyH.upPressed == true) {
+    if (keyH.upPressed) {
       ySpeed -= speed;
     }
-    if (keyH.downPressed == true) {
+    if (keyH.downPressed) {
       ySpeed += speed;
     }
-    if (keyH.leftPressed == true) {
+    if (keyH.leftPressed) {
       xSpeed -= speed;
     }
-    if (keyH.rightPressed == true) {
+    if (keyH.rightPressed) {
       xSpeed += speed;
     }
 
-    //check if up and down are both pressed, don't move in the y-direction
-    if (keyH.upPressed == true && keyH.downPressed == true) {
+    // Check if up and down are both pressed, don't move in the y-direction
+    if (keyH.upPressed && keyH.downPressed) {
       ySpeed = 0;
     }
 
-    //check if left and right are both pressed, don't move in the x-direction
-    if (keyH.leftPressed == true && keyH.rightPressed == true) {
+    // Check if left and right are both pressed, don't move in the x-direction
+    if (keyH.leftPressed && keyH.rightPressed) {
       xSpeed = 0;
     }
 
@@ -54,11 +54,8 @@ public class Player extends Entity {
     y += ySpeed;
   }
 
-
   public void draw(Graphics2D g2) {
     g2.setColor(Color.white);
-
     g2.fillRect(x, y, gp.tileSize, gp.tileSize);
   }
-
 }
